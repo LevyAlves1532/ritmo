@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\StoreUserRequest;
+use App\Mail\ConfirmUserMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -22,9 +24,12 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $body = $request->only('name', 'email', 'password');
-        User::create($body);
+
+        $user = User::create($body);
+        Mail::to($user)->send(new ConfirmUserMail($user));
+        
         return response()->json([
-            'message' => 'Usuário criado com sucesso!',
+            'message' => 'Usuário criado com sucesso! Confirme sua conta!',
         ]);
     }
 
@@ -50,5 +55,15 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function confirmAccount(User $user)
+    {
+        if (!$user->email_verified_at) {
+            $user->email_verified_at = now();
+            $user->save();
+        }
+
+        return redirect('/');
     }
 }
