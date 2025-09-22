@@ -35,6 +35,12 @@ class AuthController extends Controller
             ], 422);
         }
 
+        if (!Auth::user()->email_verified_at) {
+            return response()->json([
+                'message' => 'Você precisa confirmar sua conta!',
+            ], 403);
+        }
+
         return $this->respondWithToken($token);
     }
 
