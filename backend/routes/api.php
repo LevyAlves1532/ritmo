@@ -16,6 +16,7 @@ Route::prefix('/v1')->group(function () {
         Route::put('/auth', [AuthController::class, 'update']);
         Route::delete('/auth', [AuthController::class, 'destroy']);
 
+        Route::get('/habit', [HabitController::class, 'index']);
         Route::post('/habit', [HabitController::class, 'store']);
     });
 });
