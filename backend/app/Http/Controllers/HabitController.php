@@ -62,7 +62,7 @@ class HabitController extends Controller
      */
     public function show(Habit $habit)
     {
-        //
+        return response()->json($habit);
     }
 
     /**
