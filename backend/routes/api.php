@@ -20,5 +20,6 @@ Route::prefix('/v1')->group(function () {
         Route::get('/habit/{habit}', [HabitController::class, 'show']);
         Route::post('/habit', [HabitController::class, 'store']);
         Route::put('/habit/{habit}', [HabitController::class, 'update']);
+        Route::delete('/habit/{habit}', [HabitController::class, 'destroy']);
     });
 });

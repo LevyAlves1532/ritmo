@@ -81,6 +81,9 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        //
+        $habit->delete();
+        return response()->json([
+            'message' => 'Hábito deletado com sucesso!',
+        ]);
     }
 }
