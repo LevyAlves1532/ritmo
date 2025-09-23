@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Habit\StoreHabitRequest;
+use App\Http\Requests\Habit\UpdateHabitRequest;
 use App\Models\Habit;
 use Exception;
 use Illuminate\Http\Request;
@@ -68,9 +69,11 @@ class HabitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Habit $habit)
+    public function update(UpdateHabitRequest $request, Habit $habit)
     {
-        //
+        $body = $request->only('title', 'description', 'frequency');
+        $habit->update($body);
+        return response()->json($habit);
     }
 
     /**
