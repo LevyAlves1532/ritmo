@@ -12,9 +12,9 @@ class HabitLogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Habit $habit)
     {
-        //
+        return response()->json($habit->logs);
     }
 
     /**

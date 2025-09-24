@@ -23,6 +23,7 @@ Route::prefix('/v1')->group(function () {
         Route::put('/habit/{habit}', [HabitController::class, 'update']);
         Route::delete('/habit/{habit}', [HabitController::class, 'destroy']);
 
+        Route::get('/habit/{habit}/log', [HabitLogController::class, 'index']);
         Route::post('/habit/{habit}/log', [HabitLogController::class, 'store']);
     });
 });

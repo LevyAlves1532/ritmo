@@ -13,6 +13,10 @@ class HabitLog extends Model
         'is_done',
     ];
 
+    protected $casts = [
+        'is_done' => 'boolean',
+    ];
+
     public function habit(): BelongsTo
     {
         return $this->belongsTo(Habit::class);
