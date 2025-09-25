@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ai\AiHabitController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HabitController;
 use App\Http\Controllers\HabitLogController;
@@ -26,5 +27,11 @@ Route::prefix('/v1')->group(function () {
         Route::get('/habit/log/stats', [HabitLogController::class, 'getStats']);
         Route::get('/habit/{habit}/log', [HabitLogController::class, 'index']);
         Route::post('/habit/{habit}/log', [HabitLogController::class, 'store']);
+
+        Route::prefix('/ai')->group(function () {
+            Route::get('/habit/analysis', [AiHabitController::class, 'analyzeHabits']);
+            Route::get('/habit/suggestions', [AiHabitController::class, 'suggestHabits']);
+            Route::get('/habit/create-habit', [AiHabitController::class, 'createSmartHabits']);
+        });
     });
 });
